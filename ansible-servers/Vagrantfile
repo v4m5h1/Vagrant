@@ -1,0 +1,63 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.vm.define "ansible_control" do |ansible_control|
+    ansible_control.vm.provision :shell, inline: "echo 'Provisioning Ansible Control Server'"
+    ansible_control.vm.box = "ubuntu-trusty64"
+    ansible_control.vm.hostname = "acs"
+
+    ansible_control.vm.network "private_network", ip: "192.168.33.10"
+
+    ansible_control.vm.provider :virtualbox do |vb|
+      # Don't boot with headless mode
+      # vb.gui = true
+      vb.name = "ansible_control"
+      vb.customize ["modifyvm", :id, "--memory", "2048"]
+    end
+  end
+
+  config.vm.define "ansible_web1" do |ansible_web1|
+    ansible_web1.vm.provision :shell, inline: "echo 'Provisioning Remote Web Server 1'"
+    ansible_web1.vm.box = "ubuntu-trusty64"
+    ansible_web1.vm.hostname = "web1"
+    ansible_web1.vm.network "private_network", ip: "192.168.33.20"
+
+    ansible_web1.vm.provider :virtualbox do |vb|
+      # vb.gui = true
+      vb.name = "ansible_web1"
+      vb.customize ["modifyvm", :id, "--memory", "768"]
+    end
+
+    #ansible_web1.vm.provision "shell", inline: <<-SHELL
+    #  apt-get install vim -y
+    #  apt-get install ansible -y
+    #SHELL
+  end
+
+  config.vm.define "ansible_web2" do |ansible_web2|
+    ansible_web2.vm.provision :shell, inline: "echo 'Provisioning Remote Web Server 2'"
+    ansible_web2.vm.box = "ubuntu-trusty64"
+    ansible_web2.vm.hostname = "web2"
+    ansible_web2.vm.network "private_network", ip: "192.168.33.30"
+
+    ansible_web2.vm.provider :virtualbox do |vb|
+      # vb.gui = true
+      vb.name = "ansible_web2"
+      vb.customize ["modifyvm", :id, "--memory", "768"]
+    end
+
+    #ansible_web2.vm.provision "shell", inline: <<-SHELL
+    #  apt-get install vim -y
+    #  apt-get install ansible -y
+    #SHELL
+  end
+end

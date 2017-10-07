@@ -1,0 +1,53 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.vm.define "puppet_agent1" do |puppet_agent1|
+    # Installing puppet agent on the vm box
+    config.vm.provision "shell", inline: <<-SHELL
+      echo 'Provisioning Puppet Agent on Ubuntu-trusty64'
+      wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
+      sudo dpkg -i puppetlabs-release-trusty.deb
+      sudo apt-get update
+      sudo apt-get -y install puppet
+    SHELL
+
+    puppet_agent1.vm.box = "cubuntu-trusty64"
+    puppet_agent1.vm.hostname = "puppetagent1"
+    puppet_agent1.vm.network "private_network", ip: "192.168.44.20"
+
+    puppet_agent1.vm.provider :virtualbox do |vb|
+      vb.name = "puppet_agent1"
+      vb.customize ["modifyvm", :id, "--memory", "768"]
+    end
+  end
+
+  config.vm.define "puppet_agent2" do |puppet_agent2|
+    # Installing puppet agent on the vm box
+    config.vm.provision "shell", inline: <<-SHELL
+      echo 'Provisioning Puppet Agent on Ubuntu-trusty64'
+      wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
+      sudo dpkg -i puppetlabs-release-trusty.deb
+      sudo apt-get update
+      sudo apt-get -y install puppet
+    SHELL
+
+    puppet_agent2.vm.box = "ubuntu-trusty64"
+    puppet_agent2.vm.hostname = "puppetagent2"
+    puppet_agent2.vm.network "private_network", ip: "192.168.44.30"
+
+    puppet_agent2.vm.provider :virtualbox do |vb|
+      vb.name = "puppet_agent2"
+      vb.customize ["modifyvm", :id, "--memory", "768"]
+    end
+  end
+
+end

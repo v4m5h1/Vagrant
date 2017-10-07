@@ -1,0 +1,34 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.vm.define "puppet_master" do |puppet_master|
+    # Installing puppet server on the vm box
+    config.vm.provision "shell", inline: <<-SHELL
+      echo 'Provisioning Puppet Server on Ubuntu-trusty64'
+      wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
+      sudo dpkg -i puppetlabs-release-trusty.deb
+      sudo apt-get update
+      sudo apt-get -y install puppetserver tree
+    SHELL
+
+    puppet_master.vm.box = "ubuntu-trusty64"
+    puppet_master.vm.hostname = "puppetmaster"
+    puppet_master.vm.network "private_network", ip: "192.168.44.10"
+    # puppet_master.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
+
+    puppet_master.vm.provider :virtualbox do |vb|
+      vb.name = "puppet_master"
+      vb.customize ["modifyvm", :id, "--memory", "1024"]
+    end
+  end
+
+end
