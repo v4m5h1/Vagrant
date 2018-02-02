@@ -5,6 +5,7 @@
 ```sh
 $ vagrant box add ubuntu-trusty64 /path/to/vagrant-box.box
 Example: vagrant box add ubuntu-trusty64 D:\\XXXX\\XXXXXX\\trusty-server-cloudimg-amd64-vagrant-disk1.box
+Example: vagrant box add ubuntu/trusty64 https://cloud-images.ubuntu.com/vagrant/trusty/20180201/trusty-server-cloudimg-amd64-vagrant-disk1.box
 ```
 > Initialize the box
 ```sh
