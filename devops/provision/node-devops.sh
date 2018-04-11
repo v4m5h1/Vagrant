@@ -8,7 +8,7 @@ add-apt-repository -y ppa:openjdk-r/ppa && apt-get update && apt-get install -y 
 java -version
 
 echo "Installing Jenkins"
-wget --no-check-certificate https://pkg.jenkins.io/debian/binary/jenkins_2.89_all.deb
+wget --no-check-certificate https://pkg.jenkins.io/debian/binary/jenkins_2.107_all.deb
 dpkg -i jenkins_2.89_all.deb
 # If you need to run jenkins on different port other than 8080, use the below command
 # sudo sed 's/HTTP_PORT=8080/HTTP_PORT=9999/g' /etc/default/jenkins
