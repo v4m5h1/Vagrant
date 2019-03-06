@@ -10,10 +10,10 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.define "devops" do |devops|
+  config.vm.define "devops-master" do |master|
 
-    devops.vm.provider :virtualbox do |vb|
-      vb.name = "devops"
+    master.vm.provider :virtualbox do |vb|
+      vb.name = "Vagrant-DevOps-Master"
 
       # Display the VirtualBox GUI when booting the machine
       vb.gui = true
@@ -23,9 +23,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # devops.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
 
-    devops.vm.box = "ubuntu-xenial64"
-    devops.vm.hostname = "my.devops.io"
-    devops.vm.network "private_network", ip: "192.168.55.10"
+    master.vm.box = "ubuntu-xenial-server-64"
+    master.vm.hostname = "devops-master.io"
+    master.vm.network "private_network", ip: "192.168.55.10"
 
     # Share an additional folder to the guest VM. The first argument is
     # the path on the host to the actual folder. The second argument is
@@ -33,7 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # config.vm.synced_folder "../data", "/vagrant_data"
 	
 	# All shell commands to install tools and softwares are listed in provision/node.sh
-	config.vm.provision "shell", path: "provision/node.sh", privileged: true   
+	config.vm.provision "shell", path: "./provision/node-devops-master.sh", privileged: true   
 
   end
 
