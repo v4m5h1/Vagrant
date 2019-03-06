@@ -8,8 +8,8 @@ add-apt-repository -y ppa:openjdk-r/ppa && apt-get update && apt-get install -y 
 java -version
 
 echo "Installing Jenkins"
-wget --no-check-certificate https://pkg.jenkins.io/debian/binary/jenkins_2.107_all.deb
-dpkg -i jenkins_2.107_all.deb
+wget --no-check-certificate https://pkg.jenkins.io/debian-stable/binary/jenkins_2.150.3_all.deb
+dpkg -i jenkins_2.150.3_all.deb
 # If you need to run jenkins on different port other than 8080, use the below command
 # sudo sed 's/HTTP_PORT=8080/HTTP_PORT=9999/g' /etc/default/jenkins
 service jenkins restart
@@ -30,7 +30,7 @@ echo "Artifactory Control Script is available at ~/DEVOPS-TOOLS/artifactory-oss-
 unzip sonarqube-5.6.6.zip
 cp -R sonarqube-5.6.6/ ~/DEVOPS-TOOLS/
 echo "SonarQube Control Script is available at ~/DEVOPS-TOOLS/sonarqube-5.6.6/bin/linux-x86-64/sonar.sh <start | stop>"
-
+: '
 ## TODO: Install Nagios as well
 
 
@@ -75,7 +75,7 @@ apt-get install -y -q ipvsadm tree
 # lsns is helpful from util-linux, this is installed already
 
 # Approach 2 => Old
-: '
+
 echo "Installing Docker"
 sudo apt-get install -y apt-transport-https ca-certificates software-properties-common
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -

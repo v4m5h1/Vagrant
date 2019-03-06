@@ -12,8 +12,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "ansible_control" do |ansible_control|
     ansible_control.vm.provision :shell, inline: "echo 'Provisioning Ansible Control Server'"
-    ansible_control.vm.box = "ubuntu-trusty64"
-    ansible_control.vm.hostname = "acs"
+    ansible_control.vm.box = "ubuntu-xenial-server-64"
+    ansible_control.vm.hostname = "ansiblemaster"
 
     ansible_control.vm.network "private_network", ip: "192.168.33.10"
 
@@ -25,15 +25,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define "ansible_web1" do |ansible_web1|
-    ansible_web1.vm.provision :shell, inline: "echo 'Provisioning Remote Web Server 1'"
-    ansible_web1.vm.box = "ubuntu-trusty64"
-    ansible_web1.vm.hostname = "web1"
-    ansible_web1.vm.network "private_network", ip: "192.168.33.20"
+  config.vm.define "ansible_node1" do |ansible_node1|
+    ansible_node1.vm.provision :shell, inline: "echo 'Provisioning Remote Web Server 1'"
+    ansible_node1.vm.box = "ubuntu-xenial-server-64"
+    ansible_node1.vm.hostname = "ansiblenode1"
+    ansible_node1.vm.network "private_network", ip: "192.168.33.20"
 
-    ansible_web1.vm.provider :virtualbox do |vb|
+    ansible_node1.vm.provider :virtualbox do |vb|
       # vb.gui = true
-      vb.name = "ansible_web1"
+      vb.name = "ansible_node1"
       vb.customize ["modifyvm", :id, "--memory", "768"]
     end
 
@@ -43,15 +43,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     #SHELL
   end
 
-  config.vm.define "ansible_web2" do |ansible_web2|
-    ansible_web2.vm.provision :shell, inline: "echo 'Provisioning Remote Web Server 2'"
-    ansible_web2.vm.box = "ubuntu-trusty64"
-    ansible_web2.vm.hostname = "web2"
-    ansible_web2.vm.network "private_network", ip: "192.168.33.30"
+  config.vm.define "ansible_node2" do |ansible_node2|
+    ansible_node2.vm.provision :shell, inline: "echo 'Provisioning Remote Web Server 2'"
+    ansible_node2.vm.box = "ubuntu-xenial-server-64"
+    ansible_node2.vm.hostname = "ansiblenode2"
+    ansible_node2.vm.network "private_network", ip: "192.168.33.30"
 
-    ansible_web2.vm.provider :virtualbox do |vb|
+    ansible_node2.vm.provider :virtualbox do |vb|
       # vb.gui = true
-      vb.name = "ansible_web2"
+      vb.name = "ansible_node2"
       vb.customize ["modifyvm", :id, "--memory", "768"]
     end
 

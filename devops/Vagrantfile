@@ -10,7 +10,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.define "devops-master" do |master|
+  config.vm.define "vagrant-devops-master" do |master|
 
     master.vm.provider :virtualbox do |vb|
       vb.name = "Vagrant-DevOps-Master"
