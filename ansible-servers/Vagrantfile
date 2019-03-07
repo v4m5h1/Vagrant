@@ -61,16 +61,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     #SHELL
   end
 
-  config.vm.define "centos_node" do |centos_node|
-    centos_node.vm.provision :shell, inline: "echo 'Provisioning Centos Node'"
-    centos_node.vm.box = "centos65"
-    centos_node.vm.hostname = "centosnode"
-    centos_node.vm.network "private_network", ip: "192.168.33.40"
+  #config.vm.define "centos_node" do |centos_node|
+  #  centos_node.vm.provision :shell, inline: "echo 'Provisioning Centos Node'"
+  #  centos_node.vm.box = "centos65"
+  #  centos_node.vm.hostname = "centosnode"
+  #  centos_node.vm.network "private_network", ip: "192.168.33.40"
 
-    centos_node.vm.provider :virtualbox do |vb|
-      # vb.gui = true
-      vb.name = "centos_node"
-      vb.customize ["modifyvm", :id, "--memory", "768"]
-    end
-  end
+  #  centos_node.vm.provider :virtualbox do |vb|
+  #    # vb.gui = true
+  #    vb.name = "centos_node"
+  #    vb.customize ["modifyvm", :id, "--memory", "768"]
+  #  end
+  #end
 end
