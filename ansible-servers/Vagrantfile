@@ -23,6 +23,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       vb.name = "ansible_control"
       vb.customize ["modifyvm", :id, "--memory", "2048"]
     end
+
+    # All shell commands to install tools and softwares are listed in provision/node.sh
+	  config.vm.provision "shell", path: "./provision/node-ansible_control.sh", privileged: true
   end
 
   config.vm.define "ansible_node1" do |ansible_node1|
