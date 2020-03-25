@@ -25,4 +25,4 @@ ansible --version
 
 # optional tools for learning 
 apt-get install -y -q ipvsadm tree net-tools
-# lsns is helpful from util-linux, this is installed already
+
