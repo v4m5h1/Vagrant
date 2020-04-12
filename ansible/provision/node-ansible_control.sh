@@ -4,7 +4,7 @@
 ## Provisioning necessary softwares on the Virtual Machine
 echo "Installing JDK"
 apt-get update
-apt-get install -y openjdk-8-jre-headless
+apt-get install -y openjdk-8-jdk
 java -version
 
 echo "Installing Jenkins"
