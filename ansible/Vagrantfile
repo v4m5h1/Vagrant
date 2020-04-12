@@ -10,33 +10,33 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.define "ansible_control" do |ansible_control|
+  config.vm.define "master" do |ansible_control|
     ansible_control.vm.provision :shell, inline: "echo 'Provisioning Ansible Control Server'"
     ansible_control.vm.box = "ubuntu-xenial-server-64"
-    ansible_control.vm.hostname = "ansiblemaster"
+    ansible_control.vm.hostname = "master"
 
     ansible_control.vm.network "private_network", ip: "192.168.33.10"
 
     ansible_control.vm.provider :virtualbox do |vb|
       # Don't boot with headless mode
       # vb.gui = true
-      vb.name = "ansible_control"
-      vb.customize ["modifyvm", :id, "--memory", "2048"]
+      vb.name = "master"
+      vb.customize ["modifyvm", :id, "--memory", "4096"]
     end
 
     # All shell commands to install tools and softwares are listed in provision/node.sh
 	  config.vm.provision "shell", path: "./provision/node-ansible_control.sh", privileged: true
   end
 
-  config.vm.define "ansible_node1" do |ansible_node1|
+  config.vm.define "node" do |ansible_node1|
     ansible_node1.vm.provision :shell, inline: "echo 'Provisioning Ubuntu Node 1'"
     ansible_node1.vm.box = "ubuntu-xenial-server-64"
-    ansible_node1.vm.hostname = "ansiblenode1"
+    ansible_node1.vm.hostname = "node"
     ansible_node1.vm.network "private_network", ip: "192.168.33.20"
 
     ansible_node1.vm.provider :virtualbox do |vb|
       # vb.gui = true
-      vb.name = "ansible_node1"
+      vb.name = "node"
       vb.customize ["modifyvm", :id, "--memory", "768"]
     end
 
