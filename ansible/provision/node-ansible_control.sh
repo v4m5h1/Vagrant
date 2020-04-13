@@ -34,4 +34,4 @@ usermod -AG docker ${USER}
 docker --version
 
 # optional tools for learning 
-apt-get install -y -q ipvsadm tree net-tools
+apt-get install -y -q ipvsadm tree net-tools openssh-server vim
