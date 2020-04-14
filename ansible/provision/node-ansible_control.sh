@@ -30,7 +30,7 @@ ansible --version
 echo "Installing Docker"
 apt-get install -y docker.io
 systemctl start docker
-usermod -AG docker ${USER}
+usermod -aG docker ${USER}
 docker --version
 
 # optional tools for learning 
